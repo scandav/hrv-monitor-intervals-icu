@@ -31,9 +31,9 @@ class MainActivity : Activity(), HeartRateSensor.Listener {
         private const val KEY_API = "apiKey"
         private const val KEY_REST = "rest"
         private const val KEY_MEASURE = "measure"
-        // Typical protocol (HRV4Training / Elite HRV style): ~1-2 min settling, then 2-3 min recording.
-        private const val DEFAULT_REST_S = 120
-        private const val DEFAULT_MEASURE_S = 180
+        // Ultra-short protocol (HRV4Training-style, validated by Esco & Flatt 2014): 1 min settle, 1 min record.
+        private const val DEFAULT_REST_S = 60
+        private const val DEFAULT_MEASURE_S = 60
     }
 
     private lateinit var sensor: HeartRateSensor
@@ -266,9 +266,9 @@ class MainActivity : Activity(), HeartRateSensor.Listener {
         phaseText = label("", 20f)
 
         label("Rest before measuring (s):")
-        restInput = input("120", prefs.getInt(KEY_REST, DEFAULT_REST_S).toString(), InputType.TYPE_CLASS_NUMBER)
+        restInput = input("60", prefs.getInt(KEY_REST, DEFAULT_REST_S).toString(), InputType.TYPE_CLASS_NUMBER)
         label("Measurement length (s):")
-        measureInput = input("180", prefs.getInt(KEY_MEASURE, DEFAULT_MEASURE_S).toString(), InputType.TYPE_CLASS_NUMBER)
+        measureInput = input("60", prefs.getInt(KEY_MEASURE, DEFAULT_MEASURE_S).toString(), InputType.TYPE_CLASS_NUMBER)
 
         startButton = Button(this).apply { text = "Start measurement"; setOnClickListener { startOrCancel() } }
         root.addView(startButton)
