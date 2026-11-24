@@ -166,14 +166,14 @@ class MainActivity : Activity(), HeartRateSensor.Listener {
             } else {
                 phaseText.text = "RESTING – lie still, breathe normally\n${mmss(left)} until measurement starts"
             }
-            Phase.MEASURING -> if (left <= 0) finish() else {
+            Phase.MEASURING -> if (left <= 0) finishMeasurement() else {
                 phaseText.text = "MEASURING – stay still\n${mmss(left)} left · ${beats.size} beats"
             }
             else -> {}
         }
     }
 
-    private fun finish() {
+    private fun finishMeasurement() {
         phase = Phase.DONE
         startButton.text = "Start measurement"
         window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
